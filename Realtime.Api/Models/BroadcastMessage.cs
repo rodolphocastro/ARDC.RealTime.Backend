@@ -21,5 +21,10 @@ namespace Realtime.Api.Models
         /// Conteúdo da mensagem.
         /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        /// Data e hora da criação.
+        /// </summary>
+        public DateTimeOffset? DthCriacao { get; set; }
     }
 }
