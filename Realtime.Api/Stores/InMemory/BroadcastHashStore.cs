@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Realtime.Api.Stores.InMemory
 {
+    /// <summary>
+    /// Implementação da IBroadcastStore utilizando HashSet<T>.
+    /// </summary>
     public class BroadcastHashStore : IBroadcastStore
     {
         private readonly ICollection<BroadcastMessage> broadcastSet;

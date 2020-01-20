@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Realtime.Api.Stores.InMemory
 {
+    /// <summary>
+    /// Implementação da IMessageStore utilizando HashSet<T>.
+    /// </summary>
     public class MessageHashStore : IMessageStore
     {
         private readonly ICollection<UserMessage> messageSet;
