@@ -1,4 +1,5 @@
-﻿using Realtime.Api.Models;
+﻿using Microsoft.Extensions.Logging;
+using Realtime.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace Realtime.Api.Stores.InMemory
     public class MessageHashStore : IMessageStore
     {
         private readonly ICollection<UserMessage> messageSet;
+        private readonly ILogger<MessageHashStore> logger;
 
-        public MessageHashStore()
+        public MessageHashStore(ILogger<MessageHashStore> logger)
         {
+            this.logger = logger;
             messageSet = new HashSet<UserMessage>();
         }
 

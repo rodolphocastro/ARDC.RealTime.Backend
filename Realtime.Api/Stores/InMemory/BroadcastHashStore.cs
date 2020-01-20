@@ -1,4 +1,5 @@
-﻿using Realtime.Api.Models;
+﻿using Microsoft.Extensions.Logging;
+using Realtime.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace Realtime.Api.Stores.InMemory
     public class BroadcastHashStore : IBroadcastStore
     {
         private readonly ICollection<BroadcastMessage> broadcastSet;
+        private readonly ILogger<BroadcastHashStore> logger;
 
-        public BroadcastHashStore()
+        public BroadcastHashStore(ILogger<BroadcastHashStore> logger)
         {
+            this.logger = logger;
             broadcastSet = new HashSet<BroadcastMessage>();
         }
 
