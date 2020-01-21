@@ -88,7 +88,7 @@ namespace Realtime.Api.Controllers
             try
             {
                 var result = await mediator.Send(new CreateMessage(newMessage));
-                return CreatedAtAction(nameof(GetById), new { result.MessageId }, result);
+                return CreatedAtAction(nameof(GetById), new { id = result.MessageId }, result);
             }
             catch (Exception ex)
             {
