@@ -61,7 +61,12 @@ namespace Realtime.Api
                 endpoints.MapControllers();
             });
 
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Realtime API"));
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Realtime API");
+                c.RoutePrefix = string.Empty;
+            });
+
         }
     }
 }
