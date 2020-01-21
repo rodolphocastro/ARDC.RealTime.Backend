@@ -28,6 +28,7 @@ namespace Realtime.Api
         {
             services.AddHashStores();
             services.AddMediatRHandlers();
+            services.AddCorsConfigurations(Configuration);
             services.AddControllers();
         }
 
@@ -43,7 +44,7 @@ namespace Realtime.Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
