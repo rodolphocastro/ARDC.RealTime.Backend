@@ -30,9 +30,9 @@ namespace Realtime.Api.Hubs
             await Clients.All.ReceiveNewMessage(message);
         }
 
-        public async Task NotifyDeletedMessage(UserMessage message)
+        public async Task NotifyDeletedMessage(Guid messageId)
         {
-            await Clients.All.ReceiveDeletedMessage(message);
+            await Clients.All.ReceiveDeletedMessage(messageId);
         }
 
         public async Task CreateMessage(string content, string username)
@@ -40,7 +40,6 @@ namespace Realtime.Api.Hubs
             try
             {
                 var result = await mediator.Send(new CreateMessage(username, content));
-                await Clients.All.ReceiveNewMessage(result);
             }
             catch (Exception ex)
             {
@@ -60,7 +59,6 @@ namespace Realtime.Api.Hubs
                 }
 
                 await mediator.Send(new DeleteMessage(existingMessage));
-                await Clients.All.ReceiveDeletedMessage(existingMessage);
             }
             catch (Exception ex)
             {

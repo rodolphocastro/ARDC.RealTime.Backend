@@ -1,6 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using Realtime.Api.Clients;
 using Realtime.Api.Handlers.Messages.Commands;
+using Realtime.Api.Hubs;
 using Realtime.Api.Models;
 using Realtime.Api.Stores;
 using System;
@@ -16,11 +19,13 @@ namespace Realtime.Api.Handlers.Messages
     {
         private readonly ILogger<CommandHandler> logger;
         private readonly IMessageStore messageStore;
+        private readonly IHubContext<MessageHub, IMessageClient> hubContext;
 
-        public CommandHandler(ILogger<CommandHandler> logger, IMessageStore messageStore)
+        public CommandHandler(ILogger<CommandHandler> logger, IMessageStore messageStore, IHubContext<MessageHub, IMessageClient> hubContext)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.messageStore = messageStore ?? throw new ArgumentNullException(nameof(messageStore));
+            this.hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
         }
 
         public Task<UserMessage> Handle(CreateMessage request, CancellationToken cancellationToken)
@@ -56,6 +61,7 @@ namespace Realtime.Api.Handlers.Messages
             try
             {
                 await messageStore.DeleteMessage(messsageId, cancellationToken);
+                await hubContext.Clients.All.ReceiveDeletedMessage(messsageId);
                 return Unit.Value;
             }
             catch (Exception)
@@ -69,6 +75,7 @@ namespace Realtime.Api.Handlers.Messages
             try
             {
                 await messageStore.AddMessage(newMessage, cancellationToken);
+                await hubContext.Clients.All.ReceiveNewMessage(newMessage);
                 return newMessage;
             }
             catch (Exception)

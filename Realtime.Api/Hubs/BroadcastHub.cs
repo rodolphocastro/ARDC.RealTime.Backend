@@ -25,9 +25,9 @@ namespace Realtime.Api.Hubs
             await Clients.All.ReceiveNewBroadcast(broadcast);
         }
 
-        public async Task NotifyDeletedBroadcast(BroadcastMessage broadcast)
+        public async Task NotifyDeletedBroadcast(Guid broadcastId)
         {
-            await Clients.All.ReceiveDeletedBroadcast(broadcast);
+            await Clients.All.ReceiveDeletedBroadcast(broadcastId);
         }
 
         public async Task NotifyUpdatedBroadcast(BroadcastMessage broadcast)
