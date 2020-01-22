@@ -18,8 +18,8 @@ namespace Realtime.Api.Clients
         /// <summary>
         /// Recebe uma mensagem deletada do sistema.
         /// </summary>
-        /// <param name="message">a mensagem deletada</param>
-        Task ReceiveDeletedMessage(UserMessage message);
+        /// <param name="messageId">id da mensagem deletada</param>
+        Task ReceiveDeletedMessage(Guid messageId);
 
         /// <summary>
         /// Cria uma nova mensagem no sistema.

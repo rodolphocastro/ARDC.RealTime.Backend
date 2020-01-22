@@ -30,9 +30,9 @@ namespace Realtime.Api.Hubs
             await Clients.All.ReceiveNewMessage(message);
         }
 
-        public async Task NotifyDeletedMessage(UserMessage message)
+        public async Task NotifyDeletedMessage(Guid messageId)
         {
-            await Clients.All.ReceiveDeletedMessage(message);
+            await Clients.All.ReceiveDeletedMessage(messageId);
         }
 
         public async Task CreateMessage(string content, string username)
