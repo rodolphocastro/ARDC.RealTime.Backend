@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Bogus;
+using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Realtime.Api.Handlers.Broadcast.Commands;
@@ -13,15 +14,17 @@ namespace Realtime.Api.Services
     /// </summary>
     public class BroadcastGeneratorService : IHostedService, IDisposable
     {
-        private readonly TimeSpan runDelay = TimeSpan.FromMinutes(2);
+        private readonly TimeSpan runDelay = TimeSpan.FromMinutes(1);
         private readonly ILogger<BroadcastGeneratorService> logger;
         private readonly IMediator mediator;
+        private readonly Faker<CreateBroadcast> broadcastFaker;
         private Timer timer;
 
-        public BroadcastGeneratorService(ILogger<BroadcastGeneratorService> logger, IMediator mediator)
+        public BroadcastGeneratorService(ILogger<BroadcastGeneratorService> logger, IMediator mediator, Faker<CreateBroadcast> broadcastFaker)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            this.broadcastFaker = broadcastFaker ?? throw new ArgumentNullException(nameof(broadcastFaker));
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -46,7 +49,7 @@ namespace Realtime.Api.Services
         private Task RunAsync(object state)
         {
             logger.LogInformation("Gerando novo broadcast");
-            var createTask = mediator.Send(new CreateBroadcast("Titulo", "Conteudo!"));
+            var createTask = mediator.Send(broadcastFaker.Generate());
             return createTask;
         }
 
