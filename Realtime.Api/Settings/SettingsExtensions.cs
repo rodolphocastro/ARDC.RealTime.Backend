@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ICorsSettings signalRSettings = configuration.GetSection(CorsSettings.SignalRCorsSettings).Get<CorsSettings>();
             services.AddCors(setup =>
             {
-                setup.AddDefaultPolicy(builder => builder.WithOrigins(defaultSettings.AllowedOrigins)
+                setup.AddPolicy(CorsSettings.DefaultCorsSettings,
+                    builder => builder.WithOrigins(defaultSettings.AllowedOrigins)
                     .WithMethods(defaultSettings.AllowedMethods)
                     .AllowAnyHeader());
 
