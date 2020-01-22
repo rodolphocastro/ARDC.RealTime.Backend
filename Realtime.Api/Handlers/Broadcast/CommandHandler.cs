@@ -1,6 +1,9 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using Realtime.Api.Clients;
 using Realtime.Api.Handlers.Broadcast.Commands;
+using Realtime.Api.Hubs;
 using Realtime.Api.Models;
 using Realtime.Api.Stores;
 using System;
@@ -16,11 +19,13 @@ namespace Realtime.Api.Handlers.Broadcast
     {
         private readonly ILogger<CommandHandler> logger;
         private readonly IBroadcastStore broadcastStore;
+        private readonly IHubContext<BroadcastHub, IBroadcastClient> hubContext;
 
-        public CommandHandler(ILogger<CommandHandler> logger, IBroadcastStore broadcastStore)
+        public CommandHandler(ILogger<CommandHandler> logger, IBroadcastStore broadcastStore, IHubContext<BroadcastHub, IBroadcastClient> hubContext)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.broadcastStore = broadcastStore ?? throw new ArgumentNullException(nameof(broadcastStore));
+            this.hubContext = hubContext ?? throw new ArgumentNullException(nameof(hubContext));
         }
 
         public Task<BroadcastMessage> Handle(CreateBroadcast request, CancellationToken cancellationToken)
@@ -74,6 +79,7 @@ namespace Realtime.Api.Handlers.Broadcast
                 existingBroadcast.Title = title;
                 existingBroadcast.Content = content;
                 await broadcastStore.UpdateBroadcast(broadcastId, existingBroadcast, cancellationToken);
+                await hubContext.Clients.All.ReceiveUpdatedBroadcast(existingBroadcast);
                 return Unit.Value;
             }
             catch (Exception)
@@ -87,6 +93,7 @@ namespace Realtime.Api.Handlers.Broadcast
             try
             {
                 await broadcastStore.DeleteBroadcast(broadcastId, cancellationToken);
+                await hubContext.Clients.All.ReceiveDeletedBroadcast(broadcastId);
                 return Unit.Value;
             }
             catch (Exception)
@@ -100,6 +107,7 @@ namespace Realtime.Api.Handlers.Broadcast
             try
             {
                 await broadcastStore.AddBroadcast(newBroadcast, cancellationToken);
+                await hubContext.Clients.All.ReceiveNewBroadcast(newBroadcast);
                 return newBroadcast;
             }
             catch (Exception)
