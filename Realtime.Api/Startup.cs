@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Realtime.Api.Hubs;
+using Realtime.Api.Settings;
 using System;
 
 namespace Realtime.Api
@@ -23,6 +25,7 @@ namespace Realtime.Api
             services.AddHashStores();
             services.AddMediatRHandlers();
             services.AddCorsConfigurations(Configuration);
+            services.AddSignalR();
             services.AddControllers();
             services.AddSwaggerGen(cfg =>
             {
@@ -58,7 +61,9 @@ namespace Realtime.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers().RequireCors(CorsSettings.DefaultCorsSettings);
+                endpoints.MapHub<BroadcastHub>(BroadcastHub.HubEndpoint).RequireCors(CorsSettings.SignalRCorsSettings);
+                endpoints.MapHub<MessageHub>(MessageHub.HubEndpoint).RequireCors(CorsSettings.SignalRCorsSettings);
             });
 
             app.UseSwaggerUI(c =>
