@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Realtime.Api.Hubs;
+using Realtime.Api.Services;
 using Realtime.Api.Settings;
 using System;
 
@@ -41,6 +42,7 @@ namespace Realtime.Api
                     }
                 });
             });
+            services.AddHostedService<BroadcastGeneratorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
