@@ -1,6 +1,7 @@
 # ARDC Realtime Backend
-![](https://github.com/rodolphoalves/ARDC.RealTime.Backend/.github/workflows/dotnetcore.yml/badge.svg?branch=master)
-![](https://github.com/rodolphoalves/ARDC.RealTime.Backend/.github/workflows/dotnetcore.yml/badge.svg?branch=develop)
+
+![](https://github.com/rodolphocastro/ARDC.RealTime.Backend/workflows/.github/workflows/dotnetcore.yml/badge.svg?branch=master)
+![](https://github.com/rodolphocastro/ARDC.RealTime.Backend/workflows/.github/workflows/dotnetcore.yml/badge.svg?branch=develop)
 
 Este projeto visa demonstrar a utilização de vários conceitos de uma API REST e da biblioteca `SignalR`.
 
