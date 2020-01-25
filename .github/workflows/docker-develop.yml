@@ -6,13 +6,10 @@ on:
       - develop
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build -f ".\Realtime.Api\Dockerfile" -t "docker.pkg.github.com/rodolphocastro/ardc-realtime-api:latest" .
+      run: docker build -f .\Realtime.Api\Dockerfile -t ardc-realtime-api:latest .
 
