@@ -10,6 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{79853E9A-6
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{9845447C-EBFB-4BA9-BB52-8022BA04B9B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actions", "Actions", "{BE158A6E-7B31-45E8-BE49-83307E2F3388}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\docker-develop.yml = .github\workflows\docker-develop.yml
+		.github\workflows\docker-release.yml = .github\workflows\docker-release.yml
+		.github\workflows\dotnetcore.yml = .github\workflows\dotnetcore.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE158A6E-7B31-45E8-BE49-83307E2F3388} = {9845447C-EBFB-4BA9-BB52-8022BA04B9B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0D9A1046-C3E1-47B0-A045-58711710C42A}
