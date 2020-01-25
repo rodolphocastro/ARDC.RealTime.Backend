@@ -17,7 +17,8 @@
 + Adiciona endpoints para consultas e interação com Mensagens
 + Adiciona hubs SignalR para Broadcasts e Mensagens
 + Adicona WorkerService para geração de Broadcasts</PackageReleaseNotes>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

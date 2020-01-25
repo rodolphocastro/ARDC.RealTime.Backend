@@ -1,8 +1,14 @@
 # ARDC Realtime Backend
 
-Este projeto visa demonstrar a utilizaÁ„o de v·rios conceitos de uma API REST e da biblioteca `SignalR`.
+## Status
 
-## InstruÁıes
+**Master:** ![](https://github.com/rodolphocastro/ARDC.RealTime.Backend/workflows/.NET%20Core/badge.svg?branch=master)
+
+**Develop:** ![](https://github.com/rodolphocastro/ARDC.RealTime.Backend/workflows/.NET%20Core/badge.svg?branch=develop)
+
+Este projeto visa demonstrar a utiliza√ß√£o de v√°rios conceitos de uma API REST e da biblioteca `SignalR`.
+
+## Instru√ß√µes
 
 ### Compilando
 
@@ -22,19 +28,19 @@ dotnet run
 
 ### Testando
 
-No momento o projeto n„o possui testes automatizados.
+No momento o projeto n√£o possui testes automatizados.
 
 ## Contribuindo
 
 *W.I.P.*
 
-## Ver tambÈm
+## Ver tamb√©m
 
-Veja tambÈm o [repositÛrio para o frontend](https://github.com/rodolphocastro/ARDC.RealTime.Vue), desenvolvido utilizando `Vue`.
+Veja tamb√©m o [reposit√≥rio para o frontend](https://github.com/rodolphocastro/ARDC.RealTime.Vue), desenvolvido utilizando `Vue`.
 
 ### Recursos de Desenvolvimento
 
-Abaixo est„o links para documentaÁıes e artigos relevantes para o desenvolvimento deste demo:
+Abaixo est√£o links para documenta√ß√µes e artigos relevantes para o desenvolvimento deste demo:
 
 + https://semver.org/
 + https://docs.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-3.1
