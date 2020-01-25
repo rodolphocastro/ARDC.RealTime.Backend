@@ -1,9 +1,8 @@
 name: Docker Image CI
 
 on:
- push:
-  tags:
-   - "**"
+ release:
+  types: [published, created, edited, prereleased]
  
 jobs:
 
@@ -16,6 +15,6 @@ jobs:
     - name: Build the Docker image (Latest)
       run: docker build . --file .\Realtime.Api\Dockerfile --tag docker.pkg.github.com/rodolphocastro/ardc-realtime-api:${{github.ref}}
     - name: Login to GitHub Packages
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
     - name: Push Image to Repository
       run: docker push dockerdocker.pkg.github.com/rodolphocastro/ardc-realtime-api:${{github.ref}}
