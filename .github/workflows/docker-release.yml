@@ -1,0 +1,17 @@
+name: Docker Image CI
+
+on:
+ push:
+  tags:
+   - "**"
+ 
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image (Latest)
+      run: docker build . --file .\Realtime.Api\Dockerfile --tag docker.pkg.github.com/rodolphocastro/ardc-realtime-api:${{github.ref}}
