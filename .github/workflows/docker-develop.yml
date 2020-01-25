@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Checks Context
+      run: ls
     - name: Build the Docker image
       run: docker build . --file .\Realtime.Api\Dockerfile --tag docker.pkg.github.com/rodolphocastro/ardc-realtime-api:experimental
 
